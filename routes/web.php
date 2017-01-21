@@ -18,3 +18,6 @@ Route::get('/', function () {
 // Acommodations
 Route::resource('accommodations', 'AccommodationsController');
 Route::get('search', 'AccommodationsController@search');
+
+// AccommodationsRooms
+Route::resource('accommodations.rooms', 'AccommodationsRoomsController');
