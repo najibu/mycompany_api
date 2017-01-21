@@ -99,6 +99,8 @@ class AccommodationsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $accommodation = Accommodation::find($id);
+        $accommodation->delete();
+        return response('Deleted', 200);
     }
 }
