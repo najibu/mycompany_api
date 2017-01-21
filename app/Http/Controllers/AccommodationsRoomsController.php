@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Room;
+use App\Accommodation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 class AccommodationsRoomsController extends Controller
 {
@@ -32,9 +35,16 @@ class AccommodationsRoomsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Accommodation $accommodation)
     {
-        //
+        $input = Input::json();
+        $room = new Room();
+        $room->room_number = $input->get('roomNumber');
+
+        $room->save();
+
+        $accommodation->rooms()->save($room);
+
     }
 
     /**
@@ -66,9 +76,10 @@ class AccommodationsRoomsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Accommodation $accommodation, Room $room)
     {
-        //
+        $room->accommodation()->associate($accommodation);
+        $room->save();
     }
 
     /**
