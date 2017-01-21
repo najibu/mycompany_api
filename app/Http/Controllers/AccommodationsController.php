@@ -23,7 +23,7 @@ class AccommodationsController extends Controller
      */
     public function create()
     {
-        //
+        return view('accommodations.create');
     }
 
     /**
@@ -45,7 +45,7 @@ class AccommodationsController extends Controller
      */
     public function show($id)
     {
-        return;
+        return Accommodation::findOrFail($id);
     }
 
     /**
