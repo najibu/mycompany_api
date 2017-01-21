@@ -16,6 +16,7 @@ Route::get('/', function () {
 });
 
 // Acommodations
+Route::get('/accommodations', 'AccommodationsController@index');
 Route::get('/accommodations/create', 'AccommodationsController@create');
 Route::post('/accommodations/create', 'AccommodationsController@store');
 Route::get('/accommodations/{id?}', 'AccommodationsController@show');

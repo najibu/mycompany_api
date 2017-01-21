@@ -15,7 +15,7 @@ class AccommodationsController extends Controller
      */
     public function index()
     {
-        //
+        return Accommodation::paginate();
     }
 
     /**
