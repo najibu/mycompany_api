@@ -77,9 +77,18 @@ class AccommodationsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id)
     {
-        //
+        $input = Input::json();
+        $accommodation = Accommodation::findOrFail($id);
+        $accommodation->name = $input->get('name');
+        $accommodation->description = $input->get('description');
+        $accommodation->location_id = $input->get('location_id');
+
+        $accommodation->save();
+
+        return response($accommodation, 200)
+                ->header('Content-Type', 'application/json');
     }
 
     /**
