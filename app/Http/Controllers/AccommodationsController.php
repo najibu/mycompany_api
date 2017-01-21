@@ -14,9 +14,9 @@ class AccommodationsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Accommodation $accommodation)
     {
-        return Accommodation::paginate();
+        return $accommodation;
     }
 
     /**
@@ -54,9 +54,9 @@ class AccommodationsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Accommodation $accommodation)
     {
-        return Accommodation::findOrFail($id);
+        return $accommodation;
     }
 
     /**
@@ -77,10 +77,9 @@ class AccommodationsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id)
+    public function update(Accommodation $accommodation)
     {
         $input = Input::json();
-        $accommodation = Accommodation::findOrFail($id);
         $accommodation->name = $input->get('name');
         $accommodation->description = $input->get('description');
         $accommodation->location_id = $input->get('location_id');
@@ -91,15 +90,23 @@ class AccommodationsController extends Controller
                 ->header('Content-Type', 'application/json');
     }
 
+    public function search(Request $request, Accommodation $accommodation)
+    {
+        return $accommodation
+            ->where('name', 
+                'like',
+                '%'.$request->get('name').'%')
+            ->get();
+    }
+
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Accommodation $accommodation)
     {
-        $accommodation = Accommodation::find($id);
         $accommodation->delete();
         return response('Deleted', 200);
     }
