@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Accommodation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 use App\Http\Requests\AccommodationFormRequest;
 
 class AccommodationsController extends Controller
@@ -35,7 +36,7 @@ class AccommodationsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(AccommodationFormRequest $request)
-    {
+    {   
         $accommodation = new Accommodation(array(
             'name' => $request->get('name'),
             'description' => $request->get('description'),
@@ -44,7 +45,7 @@ class AccommodationsController extends Controller
 
         $accommodation->save();
 
-        return redirect('/accommodations/create')->with('status', 'Your accommodation has been created!');
+        return response($accommodation, 201);
     }
 
     /**
