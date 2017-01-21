@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Accommodation;
+use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -21,11 +23,12 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(Router $router)
     {
         //
 
-        parent::boot();
+        parent::boot($router);
+        $router->model('accommodations', 'App\Accommodation');
     }
 
     /**
